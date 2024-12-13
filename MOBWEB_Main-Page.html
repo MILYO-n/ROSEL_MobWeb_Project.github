@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .button_decoy:link, .button_decoy:visited {
+        background-color: #f44336;
+        color: white;
+        padding: 14px 15px;
+        text-align: left;
+        vertical-align: text-top;
+        text-decoration: none;
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        }
+
+        .button_decoy:hover, .button_decoy:active {
+        background-color: red;
+        }
+
+        .body_main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            background-color: #eaeaea; 
+            font-family: Arial, sans-serif;
+            padding: 20px; 
+
+            /*added*/
+            margin-top: 30px;
+            height: 150px; 
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+            max-width: 800px;
+            background-color: #ffffff; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            overflow: hidden; 
+            margin: 50px 0; 
+        }
+
+        .row {
+            width: 100%;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .row.header {
+            background-color: red; 
+            color: white; 
+        }
+
+        .row.subtitle {
+            background-color: #f1f1f1; 
+            color: #333; 
+        }
+
+        .row.footer {
+            background-color: #333; 
+            color: white; 
+            font-size: 0.9em; 
+        }
+
+        a:link {
+        color: lightblue;
+        background-color: transparent;
+        text-decoration: none;
+        }
+
+        .centered-box {
+            display: flex;
+            width: 100%;
+            height: 400px;
+        }
+
+        .left, .right {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto; 
+        }
+
+        .left {
+            background-color: #f8f9fa; 
+        }
+
+        .right {
+            background-color: #343a40; 
+            color: white; 
+        }
+
+        /*added*/
+        .navbar {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        }
+
+        .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        }
+
+        .navbar h5 {
+        float: right;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        } 
+
+        .navbar a:hover {
+        background: #ddd;
+        color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar_body">
+      <nav class="navbar">
+        <ul class="nav-links">
+            <h5>University of the East</h5>
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="body_main">
+    <div class="container">
+        <div class="row header">
+            <h5>Welcome to UE!</h5>
+        </div>
+        <div class="row subtitle">
+            <p>Thank you for your interest in becoming a Warrior Student! Cheers and we hope to welcome you to where your tomorrow should begin: in the East—the University of the East!</p>
+        </div>
+
+        <div class="centered-box">
+            <div class="left">
+                <h5>STEP 1: Application Form</h5>
+                <br>
+                <p>Apply for:</p>
+                <select class="list_text">
+                    <option value="college">College</option>
+                    <option>Senior High School</option>
+                    <option>Junior High School</option>
+                    <option>Elementary</option>
+                    <option>Kinder</option>
+                    <option>Graduate School</option>
+                    <option>Graduate Dentistry Program</option>
+                </select>
+                <br><br>
+                <a href="MOBWEB_Final.html" class="button_decoy">Register to Apply</a>
+                <div class="inner_box">
+                    <br>
+                    <p>To modify your application form and upload your proof of payment, please enter your reference number and last name below:</p>
+                    <br>
+                    <p>Reference no.:</p>
+                    <input><br>
+                    <p>Forgot my reference number</p>
+                    <br>
+                    <p>Last Name:</p>
+                    <input>
+                    <br>
+                    <br>
+                    <button>Edit</button>
+                    <button>Reprint</button>
+                    <button>Upload Proof of payment</button>
+                    <button>Set Exam date</button>
+                </div>
+            </div>
+            <div class="right">
+                <h5>STEP 2: Enrollment</h5>
+                <h5>Academic Credentials and Other Requirements</h5>
+                <ul class="list_text">
+                    <li><a href="MOBWEB_Main-Page.html">Update Personal Information</a></li>
+                    <li><a href="MOBWEB_Main-Page.html">Submission of Enrollment Credentials</a></li>
+                </ul>
+
+                <br>
+                <h5>Enrollment Status</h5>
+                <ul class="list_text">
+                    <li><a href="MOBWEB_Main-Page.html">View Pre-Enrollment Form (PEF)</a></li>
+                    <li>Check your email for more info</li>
+                </ul>
+
+                <br>
+                <h5>STEP 3: Payment of Fees</h5>
+                <ul class="list_text">
+                    <li><a href="MOBWEB_Main-Page.html">Payment Procedures</a></li>
+
+                    <ul style="list-style-type:circle;">
+                        <li><a href="MOBWEB_Main-Page.html">PNB</a> over-the-counter</li>
+                        <li><a href="MOBWEB_Main-Page.html">GCash</a>, Bancnet ATM, Online Banking</li>
+                    </ul>
+
+                    <li>
+                        <a href="MOBWEB_Main-Page.html">Download Registration Form</a> (pdf)
+                        <p>(Within three working days after sending your proof of payment to the <a href="MOBWEB_Main-Page.html">UE Finance Department</a>)</p>
+                    </li>
+                </ul>
+
+                <br>
+                <h5><a href="MOBWEB_Main-Page.html">STEP 4: UE Student Portal Access</a></h5>
+            </div>
+        </div>
+
+        <div class="row footer">
+            <p><a href="MOBWEB_Main-Page.html">UE Data Privacy Statement</a></p>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1063 @@
+<html>
+  <head>
+    <title>UE Online Admission</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function navigateTabs(direction) {
+            const tabs = $(".nav-tabs li");
+            const activeIndex = tabs.index($(".nav-tabs .active"));
+            let nextIndex = activeIndex + direction;
+
+            if (nextIndex >= 0 && nextIndex < tabs.length) {
+                tabs.eq(nextIndex).find("a").tab("show");
+            }
+        }
+
+        function displayAll() {
+          var lastnameOutput = document.getElementById("last_name").value
+          var firstnameOutput = document.getElementById("first_name").value
+          var midnameOutput = document.getElementById("middle_name").value
+          var programOutput = document.getElementById("course_selected").value
+          var campusoutput = document.getElementById("campus_selected").value
+          var admitoutput = document.getElementById("admit_as").value
+          var examoutput = document.getElementById("email_input").value
+          var examoutput = document.getElementById("exam_selected").value
+
+          // Display sa table
+          document.getElementById("lasts_name").innerHTML = lastnameOutput;
+          document.getElementById("firsts_name").innerHTML = firstnameOutput;
+          document.getElementById("mid_name").innerHTML = midnameOutput;
+          document.getElementById("program_output").innerHTML = programOutput;
+          document.getElementById("campus_output").innerHTML = campusoutput;
+          document.getElementById("admission_output").innerHTML = admitoutput;
+          document.getElementById("email_output").innerHTML = emailoutput;
+          document.getElementById("exam_output").innerHTML = examoutput;
+
+        }
+
+        
+        function validateForm(event) {
+          event.preventDefault();          
+                clearErrors()
+
+                //get values from the form
+                firstname = document.getElementById("first_name").value.trim();
+                middlename = document.getElementById("middle_name").value.trim();
+                lastname = document.getElementById("last_name").value.trim();
+                email = document.getElementById("email_input").value.trim();
+
+                let isValid = true;
+
+                //name validation
+                if (firstname === "" || firstname.length < 2){
+                    showError("firstnameError", "First name is required and should be at least 2 characters.");
+                    isValid = false;
+                    window.history.back();
+                }
+  
+                if (lastname === "" || lastname.length < 2){
+                    showError("lastnameError", "Last name is required and should be at least 2 characters.");
+                    isValid = false;
+                }
+  
+                if (address === ""){
+                    showError("addressError", "Address is required.");
+                    isValid = false;
+                }
+  
+                if (country === "Country"){
+                    showError("countryError", "Country is required. Please select one");
+                    isValid = false;
+                }
+
+                if (!validateEmail(email)){
+                    showError("emailError", "Please enter a valid email address.");
+                    isValid = false;
+                }
+  
+                if (phone === ""){
+                    showError("phoneError", "Please enter a valid phone number.");
+                    isValid = false;
+                }
+
+                if (isValid){
+                    alert("Form has been submitted")
+
+                }
+            }
+
+            function showError(elementId, message){
+                errorElement = document.getElementById(elementId);
+                errorElement.innerText = message;
+                inputElement = document.getElementById(elementId.replace("Error", ""));
+                inputElement.classList.add("input-error");
+            }
+
+            function validateEmail(email){
+                emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailPattern.test(email);
+            }
+
+            function clearErrors(){
+                document.querySelectorAll(".error").forEach(el => el.innerText = "");
+                document.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
+            }
+
+
+            const button = document.getElementById('submit_button');
+
+            button.addEventListener('click', function() {
+              alert("You've submitted the form. Thank you!");
+            });
+    </script>
+
+    <style>
+        .container{
+          width:calc(100% - 250px);
+          margin:0 auto;
+          border: 1px;
+        }
+
+        label {
+        width: 240px;
+        vertical-align: middle;
+        }
+
+        .tab-content{
+        margin-top: 30px;
+        height: 150px; 
+        }
+
+        .navbar {
+        overflow: hidden;
+        background-color: red;
+        top: 0;
+        width: 100%;
+        }
+
+        .navbar a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        }
+
+        .navbar h5 {
+        float: right;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        } 
+
+        .navbar a:hover {
+        background: #ddd;
+        color: black;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .input-error {
+            border: 1px solid red;
+        }
+
+        table {
+          width: 80%;
+          border-collapse: collapse;
+          background-color: #fff;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          margin: 20px 0;
+        }
+
+        th, td {
+          padding: 12px 20px;
+          text-align: left;
+          border: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #4CAF50;
+          color: white;
+        }
+
+
+
+
+    </style>
+    
+  </head>
+  <body>
+    <div class="navbar_body">
+      <nav class="navbar">
+        <ul class="nav-links">
+            <h5>University of the East</h5>
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+        </ul>
+      </nav>
+    </div>
+    
+  <div class="container">
+      
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#welcome">Welcome</a></li>
+        <li><a data-toggle="tab" href="#applicant">Applicant</a></li>
+        <li><a data-toggle="tab" href="#contact_info">Contact Info</a></li>
+        <li><a data-toggle="tab" href="#previous_school">Previous School</a></li>
+        <li><a data-toggle="tab" href="#confirmation">Confirmation</a></li>
+        <li><a data-toggle="tab" href="#submit">Submit</a></li>
+      </ul>
+    
+      <div class="tab-content">
+          <div id="welcome" class="tab-pane fade in active">
+            <h1>Welcome</h1>
+            <h3>Welcome to the UE Online Application for Admission!</h3>
+            <p>To proceed with your application, please do the following:</p>
+              <ol>
+                <li>Be ready to upload your 2" x 2" photo with white background and any of the following:</li>
+                    <ul style="list-style-type:circle;">
+                      <li>For Grade 12 graduates: Grade 12 report card</li>
+                      <li>For graduates of Non-Formal Education: PEPT/ALS rating</li>
+                      <li>For current Grade 12 students: Grade 11 report card</li>
+                      <li>For college transferees: Transcript of records or Certification of grades</li>
+                      <li>For degree holders: Transcript of records</li>
+                      <li>For cross-enrollees: Permit to cross-enroll</li>
+                    </ul> 
+                <li>Review all the information that you entered in the application form before clicking the Submit button.</li>
+                <li>Make sure to COPY/TAKE A SCREENSHOT of your reference number. You will use this later on.</li>
+              </ol>
+            <button class="btn btn-primary" onclick="navigateTabs(1)">Next</button>
+          </div>
+        
+          <div id="applicant" class="tab-pane fade">
+            <form id="applicant_page" onsubmit="validateForm(event)">
+              <h1>Applicant</h1>
+              <p>* Required Fields</p>
+
+              <br>
+              <br>
+              <label for="complete_name">Complete Given Name *</label>
+              <div id="complete_name" style="display: inline-block;">
+                <input type="text" placeholder="Last Name" style="margin-left: 50px;" required="required" id="last_name" oninput="displayAll()">
+                <span id="firstnameError" class="error"></span></br>
+
+                <input type="text" placeholder="First Name" style="margin-left: 50px;" required="required" id="first_name" oninput="displayAll()">
+                <input type="text" placeholder="Middle Name" style="margin-left: 50px;" required="required" id="middle_name" oninput="displayAll()">
+              </div>
+                          
+              <br>
+              <br>
+              <label for="birthday">Date of Birth *</label>
+              <div id="birthday" style="display: inline-block;">
+                <select style="margin-left: 50px;" required="required">
+                  <option></option>
+                  <option>January</option>
+                  <option>February</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
+                </select>
+                <select style="margin-left: 50px;" required="required">
+                  <option></option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                  <option>13</option>
+                  <option>14</option>
+                  <option>15</option>
+                  <option>16</option>
+                  <option>17</option>
+                  <option>18</option>
+                  <option>19</option>
+                  <option>20</option>
+                  <option>21</option>
+                  <option>22</option>
+                  <option>23</option>
+                  <option>24</option>
+                  <option>25</option>
+                  <option>26</option>
+                  <option>27</option>
+                  <option>28</option>
+                  <option>29</option>
+                  <option>30</option>
+                  <option>31</option>
+                </select>
+                <select style="margin-left: 50px;" required="required">
+                  <option></option>
+                  <option>1970</option>
+                  <option>1971</option>
+                  <option>1972</option>
+                  <option>1973</option>
+                  <option>1974</option>
+                  <option>1975</option>
+                  <option>1976</option>
+                  <option>1977</option>
+                  <option>1978</option>
+                  <option>1979</option>
+                  <option>1980</option>
+                  <option>1981</option>
+                  <option>1982</option>
+                  <option>1983</option>
+                  <option>1984</option>
+                  <option>1985</option>
+                  <option>1986</option>
+                  <option>1987</option>
+                  <option>1988</option>
+                  <option>1989</option>
+                  <option>1990</option>
+                  <option>1991</option>
+                  <option>1992</option>
+                  <option>1993</option>
+                  <option>1994</option>
+                  <option>1995</option>
+                  <option>1996</option>
+                  <option>1997</option>
+                  <option>1998</option>
+                  <option>1999</option>
+                  <option>2000</option>
+                  <option>2001</option>
+                  <option>2002</option>
+                  <option>2003</option>
+                  <option>2004</option>
+                  <option>2005</option>
+                  <option>2006</option>
+                  <option>2007</option>
+                  <option>2008</option>
+                  <option>2009</option>
+                  <option>2010</option>
+                  <option>2011</option>
+                  <option>2012</option>
+                  <option>2013</option>
+                  <option>2014</option>
+                  <option>2015</option>
+                  <option>2016</option>
+                  <option>2017</option>
+                  <option>2018</option>
+                  <option>2019</option>
+                  <option>2020</option>
+                  <option>2021</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="citizenship">Citizenship *</label>
+              <div id="citizenship" style="display: inline-block;">
+                <select style="margin-left: 50px;" required="required">
+                  <option></option>
+                  <option>Filipino</option>
+                  <option>Afghan</option>
+                  <option>Albanian</option>
+                  <option>Algerian</option>
+                  <option>American</option>
+                  <option>Andorran</option>
+                  <option>Angolan</option>
+                  <option>Antiguan</option>
+                  <option>Argentine</option>
+                  <option>Armenian</option>
+                  <option>Australian</option>
+                  <option>Austrian</option>
+                  <option>Azerbaijani</option>
+                  <option>Bahamian</option>
+                  <option>Bahraini</option>
+                  <option>Bangladeshi</option>
+                  <option>Barbadian</option>
+                  <option>Belarusian</option>
+                  <option>Belgian</option>
+                  <option>Belizean</option>
+                  <option>Beninese</option>
+                  <option>Bhutanese</option>
+                  <option>Bolivian</option>
+                  <option>Bosnian</option>
+                  <option>Botswanan</option>
+                  <option>Brazilian</option>
+                  <option>British</option>
+                  <option>Bruneian</option>
+                  <option>Bulgarian</option>
+                  <option>Burkinabe</option>
+                  <option>Burmese</option>
+                  <option>Burundian</option>
+                  <option>Cambodian</option>
+                  <option>Cameroonian</option>
+                  <option>Canadian</option>
+                  <option>Cape Verdean</option>
+                  <option>Central African</option>
+                  <option>Chadian</option>
+                  <option>Chilean</option>
+                  <option>Chinese</option>
+                  <option>Colombian</option>
+                  <option>Comoran</option>
+                  <option>Congolese</option>
+                  <option>Costa Rican</option>
+                  <option>Croatian</option>
+                  <option>Cuban</option>
+                  <option>Cypriot</option>
+                  <option>Czech</option>
+                  <option>Danish</option>
+                  <option>Djiboutian</option>
+                  <option>Dominican</option>
+                  <option>Dutch</option>
+                  <option>East Timorese</option>
+                  <option>Ecuadorean</option>
+                  <option>Egyptian</option>
+                  <option>Emirati</option>
+                  <option>Equatorial Guinean</option>
+                  <option>Eritrean</option>
+                  <option>Estonian</option>
+                  <option>Ethiopian</option>
+                  <option>Fijian</option>                  
+                  <option>Finnish</option>
+                  <option>French</option>
+                  <option>Gabonese</option>
+                  <option>Gambian</option>
+                  <option>Georgian</option>
+                  <option>German</option>
+                  <option>Ghanaian</option>
+                  <option>Greek</option>
+                  <option>Grenadian</option>
+                  <option>Guatemalan</option>
+                  <option>Guinean</option>
+                  <option>Guyanese</option>
+                  <option>Haitian</option>
+                  <option>Honduran</option>
+                  <option>Hungarian</option>
+                  <option>Icelandic</option>
+                  <option>Indian</option>
+                  <option>Indonesian</option>
+                  <option>Iranian</option>
+                  <option>Iraqi</option>
+                  <option>Irish</option>
+                  <option>Israeli</option>
+                  <option>Italian</option>
+                  <option>Ivorian</option>
+                  <option>Jamaican</option>
+                  <option>Japanese</option>
+                  <option>Jordanian</option>
+                  <option>Kazakh</option>
+                  <option>Kenyan</option>
+                  <option>Kiribati</option>
+                  <option>Kuwaiti</option>
+                  <option>Kyrgyz</option>
+                  <option>Lao</option>
+                  <option>Latvian</option>
+                  <option>Lebanese</option>
+                  <option>Liberian</option>
+                  <option>Libyan</option>
+                  <option>Liechtensteiner</option>
+                  <option>Lithuanian</option>
+                  <option>Luxembourger</option>
+                  <option>Malagasy</option>
+                  <option>Malawian</option>
+                  <option>Malaysian</option>
+                  <option>Maldivian</option>
+                  <option>Malian</option>
+                  <option>Maltese</option>
+                  <option>Marshallese</option>
+                  <option>Mauritanian</option>
+                  <option>Mauritian</option>
+                  <option>Mexican</option>
+                  <option>Micronesian</option>
+                  <option>Moldovan</option>
+                  <option>Monacan</option>
+                  <option>Mongolian</option>
+                  <option>Montenegrin</option>
+                  <option>Moroccan</option>
+                  <option>Mozambican</option>
+                  <option>Namibian</option>
+                  <option>Nauruan</option>
+                  <option>Nepalese</option>
+                  <option>New Zealander</option>
+                  <option>Nicaraguan</option>
+                  <option>Nigerian</option>
+                  <option>North Korean</option>
+                  <option>Norwegian</option>
+                  <option>Omani</option>
+                  <option>Pakistani</option>
+                  <option>Palauan</option>
+                  <option>Palestinian</option>
+                  <option>Panamanian</option>
+                  <option>Papua New Guinean</option>
+                  <option>Paraguayan</option>
+                  <option>Peruvian</option>
+                  <option>Polish</option>
+                  <option>Portuguese</option>
+                  <option>Qatari</option>
+                  <option>Romanian</option>
+                  <option>Russian</option>
+                  <option>Rwandan</option>
+                  <option>Saint Lucian</option>
+                  <option>Salvadoran</option>
+                  <option>Samoan</option>
+                  <option>Saudi Arabian</option>
+                  <option>Senegalese</option>
+                  <option>Serbian</option>
+                  <option>Seychellois</option>
+                  <option>Sierra Leonean</option>
+                  <option>Singaporean</option>
+                  <option>Slovak</option>
+                  <option>Slovenian</option>
+                  <option>Solomon Islander</option>
+                  <option>Somali</option>
+                  <option>South African</option>
+                  <option>South Korean</option>
+                  <option>Spanish</option>
+                  <option>Sri Lankan</option>
+                  <option>Sudanese</option>
+                  <option>Surinamese</option>
+                  <option>Swazi</option>
+                  <option>Swedish</option>
+                  <option>Swiss</option>
+                  <option>Syrian</option>
+                  <option>Taiwanese</option>
+                  <option>Tajik</option>
+                  <option>Tanzanian</option>
+                  <option>Thai</option>
+                  <option>Togolese</option>
+                  <option>Tongan</option>
+                  <option>Trinidadian</option>
+                  <option>Tunisian</option>
+                  <option>Turkish</option>
+                  <option>Turkmen</option>
+                  <option>Tuvaluan</option>
+                  <option>Ugandan</option>
+                  <option>Ukrainian</option>
+                  <option>Uruguayan</option>
+                  <option>Uzbek</option>
+                  <option>Vanuatuan</option>
+                  <option>Vatican</option>
+                  <option>Venezuelan</option>
+                  <option>Vietnamese</option>
+                  <option>Yemeni</option>
+                  <option>Zambian</option>
+                  <option>Zimbabwean</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="gender">Sex/Gender</label>
+              <div id="gender" style="display: inline-block;">
+                <select style="margin-left: 50px;">
+                  <option></option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="civil_status">Civil Status</label>
+              <div id="civil_status" style="display: inline-block;">
+                <select style="margin-left: 50px;">
+                  <option></option>
+                  <option>Single</option>
+                  <option>Married</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="religion">Religion</label>
+              <div id="religion" style="display: inline-block;">
+                <select style="margin-left: 50px;">
+                  <option></option>
+                  <option>Roman Catholic</option>
+                  <option>Islam</option>
+                  <option>Protestant</option>
+                  <option>Iglesia ni Cristo</option>
+                  <option>Buddhism</option>
+                  <option>Evangelical</option>
+                  <option>Jehovah's Witness</option>
+                  <option>Seventh-Day Adventist</option>
+                  <option>Baptist</option>
+                  <option>Aglipayan</option>
+                  <option>Mormon</option>
+                  <option>Hinduism</option>
+                  <option>Judaism</option>
+                  <option>Sikhism</option>
+                  <option>Bahá'í</option>
+                  <option>Jainism</option>
+                  <option>Shinto</option>
+                  <option>Taoism</option>
+                  <option>Confucianism</option>
+                  <option>Zoroastrianism</option>
+                  <option>Atheism</option>
+                  <option>Agnosticism</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="semester">Semester *</label>
+              <div id="semester" style="display: inline-block;">
+                <select style="margin-left: 50px;" required="required">
+                  <option></option>
+                  <option>First Semester, SY2025-2026</option>
+                  <option>Second Semester, SY2024-2025</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="admission_as">Seeking Admission As * </label>
+              <div id="admission_as" style="display: inline-block;">
+                <select style="margin-left: 50px;" required="required" id="admit_as" onchange="displayAll()">
+                  <option></option>
+                  <option>Freshman</option>
+                  <option>Transferee</option>
+                  <option>Degree Holder</option>
+                  <option>Cross Registrant</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="shs_strand">Senior High School Strand:</label>
+              <div id="shs_strand" style="display: inline-block;">
+                <select style="margin-left: 50px;">
+                  <option></option>
+                  <option>Accountancy, Business, and Management (ABM)</option>
+                  <option>Science, Technology, Engineering, and Mathematics (STEM)</option>
+                  <option>Humanities and Social Sciences (HUMSS)</option>
+                  <option>General Academic Strand (GAS)</option>
+                  <option>Agri-Fishery Arts Strand</option>
+                  <option>Home Economics Strand</option>
+                  <option>Industrial Arts Strand</option>
+                  <option>Information and Communications Technology Strand</option>
+                  <option>Sports Track</option>
+                  <option>Arts and Design Track</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="course_degree">Course / Degree Program *</label>
+              <div id="course_degree" style="display: inline-block;" required="required">
+                <select style="margin-left: 50px;" id="course_selected" onchange="displayAll()">
+                  <option></option>
+                  <option>BS in Civil Engineering</option>
+                  <option>BS in Computer Engineering</option>
+                  <option>BS in Electronics Engineering</option>
+                  <option>BS in Computer Science</option>
+                  <option>BS in Information Systems</option>
+                  <option>BS in Entertainment and Multimedia Computing (Digital Animation)</option>
+                  <option>BS in Entertainment and Multimedia Computing (Game Development)</option>
+                  <option>BS in Accountancy</option>
+                  <option>BS in Business Administration (Financial Management)</option>
+                  <option>BS in Business Administration (Marketing Management)</option>
+                  <option>BS in Business Administration (Business Economics)</option>
+                  <option>BA in Communication</option>
+                  <option>BA in Political Science</option>
+                  <option>BS in Psychology</option>
+                  <option>Bachelor of Fine Arts in Advertising Arts</option>
+                  <option>Bachelor of Elementary Education</option>
+                  <option>Bachelor of Secondary Education (English)</option>
+                  <option>Bachelor of Secondary Education (Mathematics)</option>
+                  <option>Bachelor of Physical Education</option>
+                  <option>Doctor of Dental Medicine</option>
+                  <option>BS in Medical Technology</option>
+                  <option>BS in Nursing</option>
+                  <option>Master in Business Administration</option>
+                  <option>Doctorate in Business Administration</option>
+                  <option>Master of Arts in Teaching</option>
+                  <option>Juris Doctor (Law)</option>
+                </select>
+              </div>
+
+              <br>
+              <br>
+              <label for="campus_branch">Campus *</label>
+              <div id="campus_branch" style="display: inline-block;">
+                <select style="margin-left: 50px;" required="required" id="campus_selected" onchange="displayAll()">
+                  <option></option>
+                  <option>Manila Campus</option>
+                  <option>Caloocan Campus</option>
+                </select>
+              </div>
+              <br>
+              <br>
+
+              <br>
+              <br>
+              <label for="formal_photo">Upload Latest 2" x 2" Photo with white background *</label>
+              <div id="formal_photo" style="margin-left: 50px; display: inline-block;">
+                <input type="file" accept="image/*" onchange="loadFile(event)">
+                <img id="output"/>
+              </div>
+
+              <br>
+              <br>
+              <label for="document_photos">
+                <p>Upload any of the following:</p>
+                <ul>
+                  <li>For Grade 12 graduates: Grade 12 report card. Please upload the front and back pages of your Report Card.</li>
+                  <li>For graduates of Non-Formal Education: PEPT/ALS rating</li>
+                  <li>For current Grade 12 students: Grade 11 report card. Please upload the front and back pages of your Report Card.</li>
+                  <li>For college transferees: Transcript of records or Certification of grades</li>
+                  <li>For degree holders: Transcript of records</li>
+                  <li>For cross-enrollees: Permit to cross-enroll</li>
+                </ul>
+              </label>
+              <div id="document_photos" style="margin-left: 50px; display: inline-block">
+                <input type="file" accept="image/*" onchange="loadFile(event)">
+                <img id="output"/>
+              </div>
+              <br>
+              <br>
+
+              <button class="btn btn-secondary" onclick="navigateTabs(-1)">Previous</button>
+              <button class="btn btn-primary" onclick="navigateTabs(1)">Next</button>
+              <br>
+              <br>
+            </form>
+          </div>
+        
+
+          <!--Contact info page -->
+          <div id="contact_info" class="tab-pane fade">
+            <h1>Contact Info</h1>
+            <p>* Required Fields</p>
+
+            <br>
+            <br>
+            <label for="region_address">Present Address - Region or Country *</label>
+            <div id="region_address" style="display: inline-block;">
+              <select style="margin-left: 50px;" required="required">
+                <option>National Capital Region (NCR)</option>
+                <option>Ilocos Region (Region I)</option>
+                <option>Cagayan Valley (Region II)</option>
+                <option>Central Luzon (Region III)</option>
+                <option>CALABARZON (Region IV-A)</option>
+                <option>MIMAROPA (Region IV-B)</option>
+                <option>Bicol Region (Region V)</option>
+                <option>Western Visayas (Region VI)</option>
+                <option>Central Visayas (Region VII)</option>
+                <option>Eastern Visayas (Region VIII)</option>
+                <option>Zamboanga Peninsula (Region IX)</option>
+                <option>Northern Mindanao (Region X)</option>
+                <option>Davao Region (Region XI)</option>
+                <option>SOCCSKSARGEN (Region XII)</option>
+                <option>Caraga (Region XIII)</option>
+                <option>Autonomous Region in Muslim Mindanao (ARMM)</option>
+                <option>Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)</option>
+                <option>Cordillera Administrative Region (CAR)</option>
+              </select>
+            </div>
+
+            <br>
+            <br>
+            <label for="province">Province</label>
+            <div id="province" style="display: inline-block;">
+              <input type="text" placeholder="(Please leave this field blank if you are from NCR)" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="city_name">City/Municipality</label>
+            <div id="city_name" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="district">District</label>
+            <div id="district" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="barangay">Barangay</label>
+            <div id="barangay" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="house_no">House No./Bldg./Street/Village</label>
+            <div id="house_no" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="address">Address</label>
+            <div id="address" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="zip_code">ZIP Code</label>
+            <div id="zip_code" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="mobile_no">Mobile Number *</label>
+            <div id="mobile_no" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="telephone">Telephone Number</label>
+            <div id="telephone" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="email_add">Email Address *</label>
+            <div id="email_add" style="display: inline-block;">
+              <input type="text" placeholder="Email Address" style="margin-left: 50px;" required="required" id="email_input" oninput="displayAll()">
+            </div>
+            
+            <!--Parents -->
+            <br>
+            <br>
+            <label for="father_name">Father's Complete Name *</label>
+            <div id="father_name" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="father_no">Father's Contact No. *</label>
+            <div id="father_no" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="father_occu">Father's Occupation *</label>
+            <div id="father_occu" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="mother_name">Mother's Complete Name *</label>
+            <div id="mother_name" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="mother_no">Mother's Contact No. *</label>
+            <div id="mother_no" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+            
+            <br>
+            <br>
+            <label for="mother_occu">Mother's Occupation *</label>
+            <div id="mother_occu" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="guardian_name">Guardian's Complete Name</label>
+            <div id="guardian_name" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="guardian_no">Guardian's Contact No.</label>
+            <div id="guardian_no" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="student_dis">Student with Disability *</label>
+            <div id="student_dis" style="display: inline-block;">
+              <select style="margin-left: 50px;" required="required">
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <br>
+            <br>
+            <label for="student_dis_conf">If YES, specify</label>
+            <div id="student_dis_conf" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+            <br>
+            <br>
+
+            <button class="btn btn-secondary" onclick="navigateTabs(-1)">Previous</button>
+            <button class="btn btn-primary" onclick="navigateTabs(1)">Next</button>
+          </div>
+        
+
+          <!--Prev. school page -->
+          <div id="previous_school" class="tab-pane fade">
+            <h1>Previous School</h1>
+
+            <br>
+            <br>
+            <label for="g12_grad">Are you a Grade 12 graduate or expecting to graduate?</label>
+            <div id="g12_grad" style="display: inline-block;">
+              <select style="margin-left: 50px;" required="required">
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+
+            <br>
+            <br>
+            <label for="grad_from">Graduate from / Presently Attending</label>
+            <div id="grad_from" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="school_add">School Address</label>
+            <div id="school_add" style="display: inline-block;">
+              <input type="text" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="school_type">Type of School</label>
+            <div id="school_type" style="display: inline-block;">
+              <select style="margin-left: 50px;" required="required">
+                <option>Public</option>
+                <option>Private</option>
+              </select>
+            </div>
+
+            <br>
+            <br>
+            <label for="school_code">School Code</label>
+            <div id="school_code" style="display: inline-block;">
+              <input type="number" style="margin-left: 50px;" required="required">
+            </div>
+
+            <br>
+            <br>
+            <label for="city_name">Year Graduated / will Graduate</label>
+            <div id="city_name" style="display: inline-block;">
+              <input type="number" style="margin-left: 50px;" required="required">
+            </div>
+            <br>
+            <br>
+
+            <button class="btn btn-secondary" onclick="navigateTabs(-1)">Previous</button>
+            <button class="btn btn-primary" onclick="navigateTabs(1)">Next</button>
+          </div>
+        
+
+          <!--Confirmation page -->
+          <div id="confirmation" class="tab-pane fade">
+            <h1>Confirmation</h1>
+
+            <br>
+            <br>
+            <label for="exam_date">Examination Date and Time</label>
+            <div id="exam_date" style="display: inline-block;">
+              <select style="margin-left: 50px;" required="required" id="exam_selected" onchange="displayAll()">
+                <option></option>
+                <option>TBA(No date yet)</option>
+              </select>
+            </div>
+                       
+            <p>Reminder:</p>
+            <ul>
+              <li>Examination dates will be available once your application is verified.</li>
+              <li>UE students may already select preferred examination date and time.</li>
+              <li>Be at the Admissions Office at least 30 minutes before your exam time.</li>
+              <li>Bring Mongol pencil no. 2 and the Application Confirmation printout.</li>
+            </ul>
+
+            <br>
+            <br>
+
+            <button class="btn btn-secondary" onclick="navigateTabs(-1)">Previous</button>
+            <button class="btn btn-primary" onclick="navigateTabs(1)">Next</button>
+          </div>
+        
+
+          <!--Submit page -->
+          <div id="submit" class="tab-pane fade">
+            <table>
+              <tr>
+                <td>Last Name</td>
+                <td><p id="lasts_name"></p></td>
+              </tr>
+              <tr>
+                <td>First Name</td>
+                <td><p id="firsts_name"></p></td>
+              </tr>
+              <tr>
+                <td>Middle Name</td>
+                <td><p id="mid_name"></p></td>
+              </tr>
+              <tr>
+                <td>Program</td>
+                <td><p id="program_output"></p></td>
+              </tr>
+              <tr>
+                <td>Campus</td>
+                <td><p id="campus_output"></p></td>
+              </tr>
+              <tr>
+                <td>Class</td>
+                <td><p id="admission_output"></p></td>
+              </tr>
+              <tr>
+                <td>Email Address</td>
+                <td><p id="email_output"></p></td>
+              </tr>
+              <tr>
+                <td>Examination Date and Time</td>
+                <td><p id="exam_output"></p></td>
+              </tr>
+            </table>            
+
+
+            <h5>Click Submit button to confirm your online application</h5>
+            <button class="btn btn-secondary" onclick="navigateTabs(-1)">Previous</button>
+            <button class="btn btn-success" id="submit_button">Submit</button>
+          </div>
+      </div>
+  </div>
+  </body>
+</html>
+  
